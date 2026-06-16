@@ -92,9 +92,9 @@ export default function Payroll() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Paie</h1>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button onClick={() => {
             api.get('/payroll/payslips/export-csv/', { responseType: 'blob' }).then((res) => {
               const url = window.URL.createObjectURL(new Blob([res.data]))
@@ -203,9 +203,9 @@ export default function Payroll() {
                   <input type="number" value={form.deductions} onChange={(e) => setForm({ ...form, deductions: e.target.value })} className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-secondary" />
                 </div>
               </div>
-              <div className="flex justify-end gap-3 pt-2">
-                <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 border rounded-lg text-sm">Annuler</button>
-                <button type="submit" disabled={saving} className="px-4 py-2 bg-primary text-white rounded-lg text-sm disabled:opacity-50">{saving ? 'Création...' : 'Créer'}</button>
+              <div className="flex flex-col sm:flex-row justify-end gap-3 pt-2">
+                <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 border rounded-lg text-sm w-full sm:w-auto">Annuler</button>
+                <button type="submit" disabled={saving} className="px-4 py-2 bg-primary text-white rounded-lg text-sm disabled:opacity-50 w-full sm:w-auto">{saving ? 'Création...' : 'Créer'}</button>
               </div>
             </form>
           </div>
@@ -250,9 +250,9 @@ export default function Payroll() {
                   Tous les employés ont déjà un bulletin pour cette période
                 </p>
               )}
-              <div className="flex justify-end gap-3 pt-2">
-                <button type="button" onClick={() => setShowBulk(false)} className="px-4 py-2 border rounded-lg text-sm">Annuler</button>
-                <button type="submit" disabled={bulkSaving} className="px-4 py-2 bg-secondary text-white rounded-lg text-sm disabled:opacity-50">{bulkSaving ? 'Génération...' : 'Générer'}</button>
+              <div className="flex flex-col sm:flex-row justify-end gap-3 pt-2">
+                <button type="button" onClick={() => setShowBulk(false)} className="px-4 py-2 border rounded-lg text-sm w-full sm:w-auto">Annuler</button>
+                <button type="submit" disabled={bulkSaving} className="px-4 py-2 bg-secondary text-white rounded-lg text-sm disabled:opacity-50 w-full sm:w-auto">{bulkSaving ? 'Génération...' : 'Générer'}</button>
               </div>
             </form>
           </div>

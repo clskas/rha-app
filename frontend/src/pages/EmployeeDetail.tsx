@@ -87,11 +87,11 @@ export default function EmployeeDetail() {
         )}
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div className="md:col-span-2 space-y-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
             <h2 className="font-semibold text-gray-900 mb-4">Informations générales</h2>
-            <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                 <Mail size={16} className="text-gray-400" /> <span>{emp!.user.email}</span>
               </div>

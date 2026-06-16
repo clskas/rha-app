@@ -38,7 +38,7 @@ export default function Profile() {
             <p className="text-sm text-gray-500">{user?.email}</p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-4 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div><span className="text-gray-500">Identifiant :</span> <span className="font-medium">{user?.username}</span></div>
           <div><span className="text-gray-500">Rôle :</span> <span className="font-medium capitalize">{user?.role === 'rh' ? 'RH' : user?.role}</span></div>
         </div>

@@ -1,0 +1,14 @@
+{
+  "name": "RHA - Ressource Humaine App",
+  "short_name": "RHA",
+  "description": "Application de gestion des ressources humaines pour la RD Congo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1E3A5F",
+  "theme_color": "#1E3A5F",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "/favicon.svg", "sizes": "48x48", "type": "image/svg+xml" }
+  ]
+}

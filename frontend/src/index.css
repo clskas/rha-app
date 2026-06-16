@@ -17,4 +17,9 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: var(--color-background);
   color: var(--color-text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }

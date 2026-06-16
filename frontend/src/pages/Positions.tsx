@@ -57,7 +57,7 @@ export default function Positions() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Postes</h1>
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <h2 className="font-semibold text-gray-900 mb-4">{editing ? 'Modifier' : 'Ajouter'} un poste</h2>
           <form onSubmit={handleSubmit} className="space-y-4">

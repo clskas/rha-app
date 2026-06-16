@@ -43,12 +43,12 @@ export default function Departements() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Départements</h1>
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           <h2 className="font-semibold text-gray-900 mb-4">{editing ? 'Modifier' : 'Ajouter'} un département</h2>
-          <form onSubmit={handleSubmit} className="flex gap-2">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nom du département"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-secondary" />
+              className="w-full md:flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-secondary" />
             <button type="submit" disabled={saving} className="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-primary-dark disabled:opacity-50"><Plus size={18} /></button>
           </form>
         </div>
