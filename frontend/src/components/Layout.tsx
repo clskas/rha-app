@@ -1,11 +1,13 @@
 import { Outlet, NavLink, Link } from 'react-router-dom'
-import { Users, CalendarDays, DollarSign, Briefcase, Star, Building2, LayoutDashboard, LogOut, Bell, Menu, BadgePlus, Shield, Upload, CalendarRange, FileSignature, GraduationCap, Home, User, ChevronDown } from 'lucide-react'
+import { Users, CalendarDays, DollarSign, Briefcase, Star, Building2, LayoutDashboard, LogOut, Bell, Menu, BadgePlus, Shield, Upload, CalendarRange, FileSignature, GraduationCap, Megaphone, Home, User, ChevronDown, BarChart3, Network } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import { useState, useEffect, useRef } from 'react'
 import api from '../services/api'
 
 const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Tableau de bord', roles: ['admin', 'rh', 'manager', 'employee'] },
+  { to: '/announcements', icon: Megaphone, label: 'Annonces', roles: ['admin', 'rh', 'manager', 'employee'] },
+  { to: '/org-chart', icon: Network, label: 'Organigramme', roles: ['admin', 'rh', 'manager', 'employee'] },
   { to: '/employees', icon: Users, label: 'Employés', roles: ['admin', 'rh', 'manager'] },
   { to: '/import-excel', icon: Upload, label: 'Import Excel', roles: ['admin', 'rh'] },
   { to: '/contracts', icon: FileSignature, label: 'Contrats', roles: ['admin', 'rh'] },
@@ -16,16 +18,20 @@ const navItems = [
   { to: '/payroll', icon: DollarSign, label: 'Paie', roles: ['admin', 'rh', 'employee'] },
   { to: '/recruitment', icon: Briefcase, label: 'Recrutement', roles: ['admin', 'rh'] },
   { to: '/evaluations', icon: Star, label: 'Évaluations', roles: ['admin', 'rh', 'manager', 'employee'] },
+  { to: '/polls', icon: BarChart3, label: 'Sondages', roles: ['admin', 'rh', 'manager', 'employee'] },
   { to: '/trainings', icon: GraduationCap, label: 'Formations', roles: ['admin', 'rh', 'manager', 'employee'] },
   { to: '/audit', icon: Shield, label: 'Audit', roles: ['admin', 'rh'] },
 ]
 
 const mobileNav = [
   { to: '/', icon: Home, label: 'Accueil', roles: ['admin', 'rh', 'manager', 'employee'] },
+  { to: '/announcements', icon: Megaphone, label: 'Annonces', roles: ['admin', 'rh', 'manager', 'employee'] },
+  { to: '/org-chart', icon: Network, label: 'Organigramme', roles: ['admin', 'rh', 'manager', 'employee'] },
   { to: '/employees', icon: Users, label: 'Employés', roles: ['admin', 'rh', 'manager'] },
   { to: '/leaves', icon: CalendarDays, label: 'Congés', roles: ['admin', 'rh', 'manager', 'employee'] },
   { to: '/payroll', icon: DollarSign, label: 'Paie', roles: ['admin', 'rh', 'employee'] },
   { to: '/profile', icon: User, label: 'Profil', roles: ['admin', 'rh', 'manager', 'employee'] },
+  { to: '/polls', icon: BarChart3, label: 'Sondages', roles: ['admin', 'rh', 'manager', 'employee'] },
 ]
 
 interface NotificationItem {

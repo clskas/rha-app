@@ -13,6 +13,9 @@ import Payroll from './pages/Payroll'
 import Recruitment from './pages/Recruitment'
 import Evaluations from './pages/Evaluations'
 import Trainings from './pages/Trainings'
+import Announcements from './pages/Announcements'
+import Polls from './pages/Polls'
+import OrgChart from './pages/OrgChart'
 import Departements from './pages/Departements'
 import Positions from './pages/Positions'
 import Contracts from './pages/Contracts'
@@ -33,8 +36,11 @@ const roleRoutes: Record<string, string[]> = {
   '/payroll': ['admin', 'rh', 'employee'],
   '/recruitment': ['admin', 'rh'],
   '/audit': ['admin', 'rh'],
+  '/announcements': ['admin', 'rh', 'manager', 'employee'],
   '/leave-calendar': ['admin', 'rh', 'manager', 'employee'],
   '/trainings': ['admin', 'rh', 'manager', 'employee'],
+  '/polls': ['admin', 'rh', 'manager', 'employee'],
+  '/org-chart': ['admin', 'rh', 'manager', 'employee'],
 }
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -76,6 +82,9 @@ function App() {
           <Route path="recruitment" element={<RoleRoute path="/recruitment"><Recruitment /></RoleRoute>} />
           <Route path="evaluations" element={<Evaluations />} />
           <Route path="trainings" element={<RoleRoute path="/trainings"><Trainings /></RoleRoute>} />
+          <Route path="announcements" element={<RoleRoute path="/announcements"><Announcements /></RoleRoute>} />
+          <Route path="polls" element={<RoleRoute path="/polls"><Polls /></RoleRoute>} />
+          <Route path="org-chart" element={<RoleRoute path="/org-chart"><OrgChart /></RoleRoute>} />
           <Route path="departements" element={<RoleRoute path="/departements"><Departements /></RoleRoute>} />
           <Route path="profile" element={<Profile />} />
           <Route path="audit" element={<RoleRoute path="/audit"><AuditLog /></RoleRoute>} />

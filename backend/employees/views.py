@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from datetime import date, timedelta
+from django.db.models import Prefetch
 from .models import Department, Position, Employee, EmployeeDocument, Contract
 from .serializers import DepartmentSerializer, PositionSerializer, EmployeeSerializer, EmployeeDocumentSerializer, ContractSerializer
 from permissions import IsAdminOrRH, IsAdminOrRHOrReadOnly, IsAdminOrRHOrManagerOrReadOnly
@@ -145,6 +146,45 @@ class EmployeeViewSet(viewsets.ModelViewSet):
                 errors.append(f"Ligne {row_num} : {str(e)}")
 
         return Response({'success_count': success_count, 'errors': errors})
+
+    @action(detail=False, methods=['get'], url_path='org-chart')
+    def org_chart(self, request):
+        employees = Employee.objects.select_related('user', 'department', 'position', 'manager__user').all()
+        emp_map = {}
+        for e in employees:
+            emp_map[e.id] = {
+                'id': e.id,
+                'name': e.user.get_full_name(),
+                'position_title': e.position.title if e.position else '',
+                'department_id': e.department_id,
+                'department_name': e.department.name if e.department else None,
+                'manager_id': e.manager_id,
+                'manager_name': e.manager.user.get_full_name() if e.manager else None,
+                'photo': None,
+                'subordinates': [],
+            }
+        for e_data in emp_map.values():
+            mgr_id = e_data['manager_id']
+            if mgr_id and mgr_id in emp_map:
+                emp_map[mgr_id]['subordinates'].append(e_data['id'])
+
+        dept_emp_map = {}
+        unassigned = []
+        for e_data in emp_map.values():
+            dept_name = e_data['department_name']
+            if dept_name:
+                dept_emp_map.setdefault(dept_name, []).append(e_data)
+            else:
+                unassigned.append(e_data)
+
+        departments = []
+        for dept in Department.objects.all().order_by('name'):
+            emps = dept_emp_map.pop(dept.name, [])
+            departments.append({'id': dept.id, 'name': dept.name, 'employees': emps})
+        for name, emps in dept_emp_map.items():
+            departments.append({'id': None, 'name': name, 'employees': emps})
+
+        return Response({'departments': departments, 'unassigned': unassigned})
 
     @action(detail=True, methods=['post'], parser_classes=[MultiPartParser, FormParser])
     def upload_document(self, request, pk=None):
